@@ -48,6 +48,15 @@ public class TodoEntity extends AuditableEntity {
 		this.prioridade = prioridade;
 	}
 
+	public TodoEntity(UUID id, String titulo, String descricao, boolean realizado, int prioridade) {
+		super();
+		this.id = id;
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.realizado = realizado;
+		this.prioridade = prioridade;
+	}
+
 	public String getTitulo() {
 		return titulo;
 	}
