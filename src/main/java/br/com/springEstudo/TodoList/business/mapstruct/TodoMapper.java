@@ -21,12 +21,14 @@ public interface TodoMapper {
 	@Mapping(target="realizado",ignore=true)
 	TodoEntity paraTodoEntity(TodoRequestDto request);
 
+
 	TodoEntity paraTodoEntity(TodoUpdateDto request);
 	
 	TodoResponseDto paraTodoResponseDto(TodoEntity entity);
 	
 	List<TodoResponseDto> paraListResponseDto(List<TodoEntity> entity);
 	
+	@Mapping(target = "createdAt", ignore = true)
 	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 	void update(TodoUpdateDto request , @MappingTarget TodoEntity entity);
 	

@@ -26,7 +26,7 @@ public class TodoEntity extends AuditableEntity {
 	
 	private boolean realizado;
 
-	@Column(name="titulo",nullable=false)
+	@Column(name="prioridade",nullable=false)
 	private int prioridade;
 
 	public TodoEntity() {

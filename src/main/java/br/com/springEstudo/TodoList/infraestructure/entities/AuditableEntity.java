@@ -13,7 +13,7 @@ import jakarta.persistence.MappedSuperclass;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AuditableEntity {
-	 @CreatedDate
+	 	@CreatedDate
 	    @Column(name = "created_at", nullable = false, updatable = false)
 	    private LocalDateTime createdAt;
 
