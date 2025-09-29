@@ -2,9 +2,11 @@ package br.com.springEstudo.TodoList.business.mapstruct;
 
 import java.util.List;
 
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 
 import br.com.springEstudo.TodoList.business.dto.TodoRequestDto;
@@ -25,6 +27,7 @@ public interface TodoMapper {
 	
 	List<TodoResponseDto> paraListResponseDto(List<TodoEntity> entity);
 	
+	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 	void update(TodoUpdateDto request , @MappingTarget TodoEntity entity);
 	
 }
