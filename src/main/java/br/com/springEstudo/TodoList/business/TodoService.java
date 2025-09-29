@@ -54,26 +54,20 @@ public class TodoService {
 		TodoEntity todoSalvo = todoRepository.save(todo);
 		return todoMapper.paraTodoResponseDto(todoSalvo);
 	}
-
-	public boolean updateStatus(UUID id) {
-		if (!todoRepository.existsById(id)) {
-			throw new ResourceNotFoundException("Id não encontrado: " + id);
-		}
-		TodoEntity todo = todoRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Id não encontrado" + id));
-		if (todo.isRealizado() == true) {
-			todo.setRealizado(false);
-			return todo.isRealizado();
-		} else {
-			todo.setRealizado(true);
-			return todo.isRealizado();
-		}
-
-	}
 	
 	@Transactional
+	public boolean updateStatus(UUID id) {
+		TodoEntity todo = todoRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Id não encontrado: " + id));
+		todo.setRealizado(!todo.isRealizado());
+		todoRepository.save(todo);
+		return todo.isRealizado();
+
+	}
+
+	@Transactional
 	public void deleteById(UUID id) {
-		if(!todoRepository.existsById(id)) {
+		if (!todoRepository.existsById(id)) {
 			throw new ResourceNotFoundException("Id não encontrado: " + id);
 		}
 		try {

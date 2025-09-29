@@ -5,9 +5,11 @@ import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.springEstudo.TodoList.business.TodoService;
 import br.com.springEstudo.TodoList.business.dto.TodoRequestDto;
 import br.com.springEstudo.TodoList.business.dto.TodoResponseDto;
+import br.com.springEstudo.TodoList.business.dto.TodoUpdateDto;
 
 
 
@@ -45,4 +48,23 @@ public class TodoController {
 		TodoResponseDto response=todoService.getTodoById(id);
 		return ResponseEntity.ok().body(response);
 	}
+	
+	@PutMapping("/{id}/update")
+	public ResponseEntity<TodoResponseDto> updateTodoExistente(@PathVariable UUID id,@RequestBody TodoUpdateDto request) {
+		TodoResponseDto response =todoService.updateTodo(id, request);
+		return ResponseEntity.ok().body(response);
+	}
+	@PutMapping("/{id}/updateStatus")
+	public ResponseEntity<TodoResponseDto> updateTodoStatus(@PathVariable UUID id) {
+		todoService.updateStatus(id);
+		TodoResponseDto response =todoService.getTodoById(id);
+		return ResponseEntity.ok().body(response);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteById(@PathVariable UUID id){
+		todoService.deleteById(id);
+		return ResponseEntity.ok().build();
+	}
+	
 }
